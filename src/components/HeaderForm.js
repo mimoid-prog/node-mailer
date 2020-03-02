@@ -4,10 +4,28 @@ const HeaderForm = () => {
   /*form*/
   const login = useFormInput("");
   const password = useFormInput("");
+  const [error, setError] = useState(["", ""]);
 
   const onSubmit = e => {
     e.preventDefault();
-    console.log(login.value, " ", password.value);
+
+    const credentials = {
+      login: login.value,
+      password: password.value
+    };
+
+    const signIn = async () => {
+      const res = await fetch("/api/sign_in", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(credentials)
+      });
+
+      const data = await res.json();
+      console.log(data);
+    };
+
+    signIn();
   };
 
   return (

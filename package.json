@@ -39,5 +39,6 @@
     "concurrently": "^5.1.0",
     "postcss-cli": "^7.1.0",
     "tailwindcss": "^1.2.0"
-  }
+  },
+  "proxy": "http://localhost:3000"
 }
