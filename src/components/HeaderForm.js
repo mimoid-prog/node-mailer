@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
 
 const HeaderForm = () => {
   const login = useFormInput("");
   const password = useFormInput("");
   const [error, setError] = useState(["", ""]);
+  const [navigate, setNavigate] = useState(false);
 
   const onSubmit = e => {
     e.preventDefault();
@@ -21,11 +23,16 @@ const HeaderForm = () => {
       });
 
       const data = await res.json();
-      setError([data.field, data.message]);
+      if (data.error === true) setError([data.field, data.message]);
+      else setNavigate(true);
     };
 
     signIn();
   };
+
+  if (navigate) {
+    return <Redirect to="/dashboard" />;
+  }
 
   return (
     <form className="pt-6" onSubmit={onSubmit}>

@@ -1,14 +1,19 @@
 import React from "react";
-import "./styles/app.css";
-import "./styles/customStyles.css";
-import HeaderContent from "./components/HeaderContent";
-import HeaderVisuals from "./components/HeaderVisuals";
+import Home from "./Home";
+import Dashboard from "./Dashboard";
+import { Switch, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div className="container mx-auto text-center p-6 h-screen flex flex-col justify-between lg:flex-row lg:text-left lg:p-0 lg:py-6">
-      <HeaderContent />
-      <HeaderVisuals />
+    <div>
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route path="/dashboard">
+          <Dashboard />
+        </Route>
+      </Switch>
     </div>
   );
 }
