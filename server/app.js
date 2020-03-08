@@ -3,11 +3,13 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const User = require("./models/User");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const app = express();
 const port = 3000;
 
 app.use(bodyParser.json());
+app.use(express.json());
 
 mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true });
 
@@ -26,8 +28,13 @@ app.post("/api/sign_in", (req, res) => {
         });
       else {
         const dehash = bcrypt.compareSync(body.password, user[0].password);
-        if (dehash === true) res.json({ error: false, field: "", message: "" });
-        else
+        if (dehash === true) {
+          const token = jwt.sign(
+            { login: body.login },
+            process.env.ACCESS_TOKEN_SECRET
+          );
+          res.json({ error: false, field: "", message: "", token });
+        } else
           res.status(401).json({
             error: true,
             field: "password",

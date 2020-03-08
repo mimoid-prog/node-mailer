@@ -24,7 +24,10 @@ const HeaderForm = () => {
 
       const data = await res.json();
       if (data.error === true) setError([data.field, data.message]);
-      else setNavigate(true);
+      else {
+        localStorage.setItem("nodemailer-token", data.token);
+        setNavigate(true);
+      }
     };
 
     signIn();

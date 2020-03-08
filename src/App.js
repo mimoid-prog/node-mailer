@@ -2,6 +2,7 @@ import React from "react";
 import Home from "./Home";
 import Dashboard from "./Dashboard";
 import { Switch, Route } from "react-router-dom";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   return (
@@ -10,9 +11,9 @@ function App() {
         <Route exact path="/">
           <Home />
         </Route>
-        <Route path="/dashboard">
+        <PrivateRoute path="/dashboard">
           <Dashboard />
-        </Route>
+        </PrivateRoute>
       </Switch>
     </div>
   );
