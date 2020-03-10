@@ -2,7 +2,7 @@ import React from "react";
 import Home from "./Home";
 import Dashboard from "./Dashboard";
 import { Switch, Route } from "react-router-dom";
-import PrivateRoute from "./components/PrivateRoute";
+import PrivateRoute from "./routes/PrivateRoute";
 
 function App() {
   return (
